@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "repo-diva"
+  "defaultProject": "repo-diva",
+  "cli": {
+    "analytics": "2e75cac3-491d-4d43-b1e2-3fdd9be1406f"
+  }
 }
