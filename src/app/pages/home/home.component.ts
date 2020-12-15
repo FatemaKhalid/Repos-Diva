@@ -9,10 +9,17 @@ import { Repos } from "../../classes/repos";
 })
 
 export class HomeComponent implements OnInit {
-  lstRepos: Repos[];
+  lstRepos: Repos[] = [];
+  reqRepos: Repos[] = [];
+  // Paginator Data
+  pageIndex:number;
+  pageSize:number;
+  length:number;
   
   constructor(private githubapiservice: GithubAPIService){
-    this.lstRepos=[];
+    this.pageIndex=0;
+    this.pageSize=10;
+    this.length=100;
   }
 
   calculate_timeInterval_days(created_at:string):number{
@@ -40,11 +47,36 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  goToNext(){
+    this.pageIndex++;
+    this.lstRepos = []
+    console.log(this.pageIndex);
+    if (this.pageIndex%3==0) {
+      this.githubapiservice.getRepos()
+        .subscribe(
+          data=>{
+            this.reqRepos = data.items;
+            this.lstRepos = this.reqRepos.slice(0, 10);
+            this.update_repo_details();            
+          }
+        );
+    }else{
+      let idx = this.pageIndex%3;
+      this.lstRepos = this.reqRepos.slice(idx*10+1, (idx+1)*10);
+    }
+    window.scroll({
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth'
+    });
+  }
+
   ngOnInit(){
     this.githubapiservice.getRepos()
     .subscribe(
       data=>{
-        this.lstRepos = data.items;
+        this.reqRepos = data.items;
+        this.lstRepos = this.reqRepos.slice(0, 10);
         this.update_repo_details();
         // TODO: Need to handle if reponse is empty or not correct
         console.log(this.lstRepos[0]);

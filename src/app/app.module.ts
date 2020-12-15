@@ -10,6 +10,7 @@ import { GithubAPIService } from "./services/github-api.service";
 import { HomeComponent } from "./pages/home/home.component";
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { RepoDetailsComponent } from './pages/repo-details/repo-details.component';
 
 @NgModule({
@@ -25,6 +26,7 @@ import { RepoDetailsComponent } from './pages/repo-details/repo-details.componen
     HttpClientModule,
     MatListModule, 
     MatCardModule,
+    MatPaginatorModule,
   ],
   providers: [DatePipe, GithubAPIService],
   bootstrap: [AppComponent]
