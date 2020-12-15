@@ -1,0 +1,99 @@
+
+$light-green:rgb(93, 202, 93);
+$border-grey:rgb(171, 172, 171);
+$border-grey-trans:rgba(171, 172, 171, 0.3);
+// Styling Card containing each repo
+.repo-container{
+    display: flex;
+    width: 100%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    box-shadow: 0.7em 0.5em $border-grey-trans;
+    color: $border-grey;
+    border-left: solid 1em $light-green;
+    // Owner Avatar
+    .repo-avatar{
+        height: 90%;
+        margin: .5em 1em;
+        border-radius: 50%;
+    }
+    // Issues/Stars number
+    .repo-nb {
+        border: 1px solid $light-green;
+        border-radius: 10%;
+        padding: .5em;
+        margin: .3em;
+        font-size: 12px;
+        span {
+            color: $light-green;
+        }
+    }
+
+    .repo-stars{
+        margin-left: 0;
+    }
+}
+
+
+.repo-details {
+    width: 100%;
+    flex-direction: column;
+
+    p{
+        margin: .3em .3em .3em 0;
+    }
+
+    .repo-name{
+        font-size: 2em;
+        margin: .3em 0;
+        text-transform: capitalize;
+        font-weight: 900;
+        color: $light-green;
+        text-decoration: none;
+    }
+
+    .repo-desc {
+        width: 90%;
+        min-height: 20%;
+        margin: .3em 0;
+        font-size: 1.2em;
+    }
+    
+    .repo-owner, .repo-created{
+        color: $light-green;
+    }
+}
+
+// Tooltip styling to demonstrate content
+
+.tooltiptext {
+    visibility: hidden;
+    background-color:  $border-grey;
+    font-size: 1rem;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 0.5em;
+    position: relative;
+    top: 2rem;
+    left: -3rem;
+    z-index: 5;
+}
+
+.tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent  $border-grey transparent;
+}
+
+.repo-desc:hover .desc-tip{
+    visibility: visible;
+}
+
+.repo-name:hover .name-tip{
+    visibility: visible;
+}
