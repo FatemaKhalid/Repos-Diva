@@ -8,7 +8,7 @@ import { DatePipe } from '@angular/common';
 })
 export class GithubAPIService {
   apiReq: string = "";
-  pageNum: number = 1;
+  // pageNum: number = 1;
   latest_date: string;
 
   constructor(private datePipe: DatePipe, private httpclient:HttpClient) { 
@@ -18,9 +18,9 @@ export class GithubAPIService {
     this.latest_date = this.datePipe.transform(mdate, formatdate)|| '';
   }
 
-  getRepos(): Observable<any>{
-    this.apiReq = 'https://api.github.com/search/repositories?q=created:%3E'+this.latest_date?.toString()+'&sort=stars&order=desc&page='+this.pageNum.toString();
-    this.pageNum++;
+  getRepos(loadingPage:number): Observable<any>{
+    this.apiReq = 'https://api.github.com/search/repositories?q=created:%3E'+this.latest_date?.toString()+'&sort=stars&order=desc&page='+loadingPage.toString();
+    // this.pageNum++;
     return this.httpclient.get(this.apiReq);
   }
 }

@@ -1,11 +1,13 @@
 
+<mat-toolbar class="toolBar">
+    <span>The most starred Github repos created in the last 30 days</span>
+</mat-toolbar>
 <mat-card class="cards-container">
     <app-repo-details *ngFor="let repo of lstRepos" class="repo-card" [curRepo]="repo"></app-repo-details>
 </mat-card>
 <mat-paginator [length]="100"
               [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]"
-              (page)="goToNext()"
+              (page)="getPaginatorData($event)" 
               class="paginator"
               >
 </mat-paginator>

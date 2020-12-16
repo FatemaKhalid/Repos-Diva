@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GithubAPIService } from "../../services/github-api.service";
 import { Repos } from "../../classes/repos";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-home',
@@ -9,31 +10,29 @@ import { Repos } from "../../classes/repos";
 })
 
 export class HomeComponent implements OnInit {
+  // Repos listed per page
   lstRepos: Repos[] = [];
+  // Repos received from request
   reqRepos: Repos[] = [];
   // Paginator Data
-  pageIndex:number;
-  pageSize:number;
-  length:number;
-  
+  lowValue: number = 0;
+  highValue: number = 10;
+  loadedPage: number = 1;
+
   constructor(private githubapiservice: GithubAPIService){
-    this.pageIndex=0;
-    this.pageSize=10;
-    this.length=100;
   }
 
   calculate_timeInterval_days(created_at:string):number{
       // Calculating time interval
       let Difference_In_Time = new Date().getTime() - new Date(created_at).getTime();
       let Difference_In_Days = (Difference_In_Time)/ (1000 * 3600 * 24);
-      console.log(typeof created_at);
       
       return Difference_In_Days;
   }
 
   update_repo_details(){
     
-    this.lstRepos.forEach(repo => { 
+    this.reqRepos.forEach(repo => { 
       let maxlen = 190;
       repo.time_interval = Math.round(this.calculate_timeInterval_days(repo.created_at)).toString();
       // Replace description if retrieved is empty
@@ -47,44 +46,42 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  goToNext(){
-    this.pageIndex++;
-    this.lstRepos = []
-    console.log(this.pageIndex);
-    if (this.pageIndex%3==0) {
-      this.githubapiservice.getRepos()
-        .subscribe(
-          data=>{
-            this.reqRepos = data.items;
-            this.lstRepos = this.reqRepos.slice(0, 10);
-            this.update_repo_details();            
-          }
-        );
-    }else{
-      let idx = this.pageIndex%3;
-      this.lstRepos = this.reqRepos.slice(idx*10+1, (idx+1)*10);
-    }
-    window.scroll({
-      top: 0, 
-      left: 0, 
-      behavior: 'smooth'
-    });
-  }
 
-  ngOnInit(){
-    this.githubapiservice.getRepos()
+  sendRepoReq(loadingPage: number=1){
+    this.githubapiservice.getRepos(loadingPage)
     .subscribe(
       data=>{
         this.reqRepos = data.items;
-        this.lstRepos = this.reqRepos.slice(0, 10);
+        this.lstRepos = this.reqRepos.slice(this.lowValue, this.highValue);
         this.update_repo_details();
-        // TODO: Need to handle if reponse is empty or not correct
-        console.log(this.lstRepos[0]);
+        // TODO: Need to handle if No internet connection available
         
       }
     );
   }
 
+  ngOnInit(){
+    this.sendRepoReq();
+  }
+
+  getPaginatorData(event: PageEvent): PageEvent {
+    this.lowValue = event.pageIndex%3 * event.pageSize;
+    this.highValue = this.lowValue + event.pageSize;
+
+    // Sending API request when moving out of current 30 Repo
+    if (this.loadedPage != Math.floor(event.pageIndex/3)+1) {
+      this.reqRepos=[];
+      this.loadedPage= Math.floor(event.pageIndex/3)+1;
+      this.sendRepoReq(this.loadedPage);      
+    }
+    this.lstRepos = this.reqRepos.slice(this.lowValue, this.highValue);
+    window.scroll({
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth'
+    });
+    return event;
+  }
 
 }
 

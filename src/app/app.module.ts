@@ -11,6 +11,7 @@ import { HomeComponent } from "./pages/home/home.component";
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { RepoDetailsComponent } from './pages/repo-details/repo-details.component';
 
 @NgModule({
@@ -27,6 +28,7 @@ import { RepoDetailsComponent } from './pages/repo-details/repo-details.componen
     MatListModule, 
     MatCardModule,
     MatPaginatorModule,
+    MatToolbarModule,
   ],
   providers: [DatePipe, GithubAPIService],
   bootstrap: [AppComponent]

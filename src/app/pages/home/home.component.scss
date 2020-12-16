@@ -1,3 +1,18 @@
+$border-grey-trans:rgba(171, 172, 171, 0.2);
+$border-grey:rgb(171, 172, 171);
+$light-green:rgb(93, 202, 93);
+.toolBar{
+    color: $light-green;
+    font-size: 2.5em;
+    background-color: $border-grey-trans;
+    text-shadow: 0.3rem 0.3rem $border-grey-trans;
+    font-weight: bolder;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 5;
+}
+
 .repo-card{
     min-height: 30%;
     max-height: 140px;
@@ -7,8 +22,8 @@
     flex-flow: row;
 }
 
-.cards-container:last-child{
-    margin-bottom: 2em;
+.cards-container{
+    padding:6% 0;
 }
 
 .paginator{
@@ -16,4 +31,5 @@
     left: 0;
     bottom: 0;
     width: 100%;
+    background-color: $border-grey-trans;
 }
