@@ -1,6 +1,6 @@
 # RepoDiva
 
-A small webapp that will list the most starred Github repos that were created in the last 30 days with the framework Angular.
+A small webapp that lists the most starred Github repos that were created in the last 30 days with the framework Angular.
 
 ## To run the project
 
@@ -9,10 +9,10 @@ A small webapp that will list the most starred Github repos that were created in
 
 ## Libraries used in this project
 
-* *HttpClientModule:* To make the send API request and receive the response, its benefits:
+* *HttpClientModule:* To send API request and receive the response, its benefits:
    * JSON assumed by default(As the used Github API responds with JSON Data) so no need for mapping
    * Immutable request/response objects
-   * Better support for interceptors as middleware as this helps better error handling in case of more feature 
+   * A support for interceptors as middleware as this helps better error handling in case of more features 
 * *Angular Material:* To use a range of UI angular material components which are:
   * Cross-browser, and can be utilized to form reusable web components
   * It has an inbuilt responsive pattern so no need for restructure for purpose of responsiveness
