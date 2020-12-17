@@ -1,7 +1,5 @@
 
-$light-green:rgb(93, 202, 93);
-$border-grey:rgb(171, 172, 171);
-$border-grey-trans:rgba(171, 172, 171, 0.3);
+@import '../../../styles.scss';
 // Styling Card containing each repo
 .repo-container{
     display: flex;
@@ -9,7 +7,10 @@ $border-grey-trans:rgba(171, 172, 171, 0.3);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     box-shadow: 0.7em 0.5em $border-grey-trans;
     color: $border-grey;
-    border-left: solid 1em $light-green;
+    border-left: solid 1em $repo-diva-primary;
+    padding: 1em;
+    margin: 1em;
+    
     // Owner Avatar
     .repo-avatar{
         height: 90%;
@@ -18,13 +19,20 @@ $border-grey-trans:rgba(171, 172, 171, 0.3);
     }
     // Issues/Stars number
     .repo-nb {
-        border: 1px solid $light-green;
+        border: 2px solid $repo-diva-primary;
         border-radius: 10%;
-        padding: .5em;
+        padding: .7em;
         margin: .3em;
-        font-size: 12px;
+        font-size: 1em;
+        
         span {
-            color: $light-green;
+            color: $repo-diva-primary;
+        }
+        
+        .icon{
+            position: relative;
+            top: 6px;
+            margin-right: 3px;
         }
     }
 
@@ -47,7 +55,7 @@ $border-grey-trans:rgba(171, 172, 171, 0.3);
         margin: .3em 0;
         text-transform: capitalize;
         font-weight: 900;
-        color: $light-green;
+        color: $repo-diva-primary;
         text-decoration: none;
     }
 
@@ -55,12 +63,17 @@ $border-grey-trans:rgba(171, 172, 171, 0.3);
         width: 90%;
         min-height: 20%;
         margin: .3em 0;
-        font-size: 1.2em;
+        font-size: 20px;
+        line-height: 23px;
     }
     
     .repo-owner, .repo-created{
-        color: $light-green;
+        color: $repo-diva-primary;
     }
+}
+
+.repo-container:hover {
+    background-color: #eee;
 }
 
 // Tooltip styling to demonstrate content

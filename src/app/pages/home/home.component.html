@@ -1,7 +1,9 @@
-
-<mat-toolbar class="toolBar">
-    <span>The most starred Github repos created in the last 30 days</span>
-</mat-toolbar>
+<p>
+    <mat-toolbar class="toolBar">
+        <div class="app-name">Repo Diva</div>
+        <div class="app-func">Showing the most starred Github repos created in the last 30 days</div>
+    </mat-toolbar>
+  </p>
 <mat-card class="cards-container">
     <app-repo-details *ngFor="let repo of lstRepos" class="repo-card" [curRepo]="repo"></app-repo-details>
 </mat-card>

@@ -6,8 +6,8 @@
         <a class="repo-name" href="{{repo.html_url}}" target="_blank">{{repo.name}}<span class="name-tip tooltiptext">Name</span></a>
         <div class="repo-desc">{{repo.description}}<span class="desc-tip tooltiptext">Description</span></div>
         <p matLine>
-            <span class="repo-nb repo-stars">Stars: <span>{{repo.stargazers_count}}</span></span>
-            <span class="repo-nb repo-issues">Issues: <span>{{repo.open_issues_count}}</span></span>
+            <span class="repo-nb repo-stars"><span><mat-icon class="icon">star_border</mat-icon></span>Stars: <span>{{repo.stargazers_count}}</span></span>
+            <span class="repo-nb repo-issues"><span><mat-icon class="icon">error_outline</mat-icon></span>Issues: <span>{{repo.open_issues_count}}</span></span>
             <span>Submitted <span class="repo-created">{{repo.time_interval}} days ago </span></span>
             <span>by<span class="repo-owner"> {{repo.owner.login}}</span></span>
         </p>
